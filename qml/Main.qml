@@ -16,132 +16,157 @@
 
 import QtQuick 2.7
 import Lomiri.Components 1.3
-//import QtQuick.Controls 2.2
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import Qt.labs.settings 1.0
 import Ubuntu.Components 1.3
 
-MainView {
-    id: root
-    objectName: 'mainView'
-    applicationName: 'qttest.cranesuciter'
-    automaticOrientation: true
-
+ApplicationWindow {
+    visible: true
     width: units.gu(45)
     height: units.gu(75)
+    id: mainWindow
 
     property real elapsedSeconds: 0
 
-    Page {
-        id: mainPage
+    SwipeView {
+        id: view
         anchors.fill: parent
-        header: PageHeader {
-            id: header
+        currentIndex: 1
+        
+        Item {
 
-            RowLayout {
+            Rectangle
+            {
+                anchors.fill: parent
+                color: "black"
+            }
+
+            Label {
+                text: "StopWatch"
+                font.pixelSize: units.gu(5)
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.topMargin: units.gu(2)
+                color: "white"
+            }
+
+            Timer {
+                id: stopwatchTimer
+                interval: 10 // 0.1 second
+                running: false
+                repeat: true
+                onTriggered: {
+                    elapsedSeconds += 0.01
+                }
+            }
+
+            Rectangle {
+
+                id: circleBackground
+                width: units.gu(25) // adjust to your needs
+                height: width // to make it a circle
+                color: "grey" // adjust to your needs
+                radius: width / 2
                 anchors.centerIn: parent
-                Button {
-                    text: "Stopwatch"
-                    onClicked: mainPage.StackView.push(Qt.resolvedUrl("Main.qml"))
+
+            }
+
+            Label {
+                //anchors {
+                //    top: header.bottom
+                //    left: parent.left
+                //    right: parent.right
+                //    bottom: parent.bottom
+                //}
+                anchors.centerIn: circleBackground
+                font.pixelSize: units.gu(5)
+                text: {
+                    var minutes = Math.floor(mainWindow.elapsedSeconds / 60);
+                    var seconds = Math.floor(mainWindow.elapsedSeconds % 60);
+                    var centiseconds = Math.floor((mainWindow.elapsedSeconds % 1) * 100);
+                    return minutes.toString().padStart(2, '0') + ":" + 
+                        seconds.toString().padStart(2, '0') + ":" + 
+                        centiseconds.toString().padStart(2, '0');
                 }
-                Button {
-                    text: "Notes"
-                    onClicked: mainPage.StackView.push(Qt.resolvedUrl("Notes.qml"))
+
+                verticalAlignment: Label.AlignVCenter
+                horizontalAlignment: Label.AlignHCenter
+            }
+
+            Button {
+                id: startStopButton
+                text: stopwatchTimer.running ? i18n.tr('Stop') : i18n.tr('Start')
+                color: stopwatchTimer.running ? UbuntuColors.red : UbuntuColors.green
+                anchors {
+                    bottom: parent.bottom
+                    horizontalCenter: parent.horizontalCenter
+                    bottomMargin: units.gu(4)
                 }
-                Button {
-                    text: "Music"
-                    onClicked: mainPage.StackView.push(Qt.resolvedUrl("Notes.qml"))
+                onClicked: {
+                    stopwatchTimer.running = !stopwatchTimer.running
+                    if (!stopwatchTimer.running) {
+                        stopwatchTimer.stop()
+                    } else {
+                        stopwatchTimer.start()
+                    }
                 }
             }
 
-            StyleHints {
-                backgroundColor: "transparent"
-                dividerColor: "transparent"
-            }
-        }
+            Button {
+                id: resetButton
+                anchors {
+                    bottom: startStopButton.top
+                    horizontalCenter: parent.horizontalCenter
+                    bottomMargin: units.gu(2)
+                }
+                text: i18n.tr('Reset')
+                color: UbuntuColors.green
+                visible: !stopwatchTimer.running && mainWindow.elapsedSeconds > 0
 
-        Rectangle {
-            anchors.fill: parent
-            color: "black"
-        }
-
-        Timer {
-            id: stopwatchTimer
-            interval: 10 // 0.1 second
-            running: false
-            repeat: true
-            onTriggered: {
-                elapsedSeconds += 0.01
-            }
-        }
-
-        Rectangle {
-
-            id: circleBackground
-            width: units.gu(25) // adjust to your needs
-            height: width // to make it a circle
-            color: "grey" // adjust to your needs
-            radius: width / 2
-            anchors.centerIn: parent
-
-        }
-
-        Label {
-            //anchors {
-            //    top: header.bottom
-            //    left: parent.left
-            //    right: parent.right
-            //    bottom: parent.bottom
-            //}
-            anchors.centerIn: circleBackground
-            font.pixelSize: units.gu(5)
-            text: {
-                var minutes = Math.floor(root.elapsedSeconds / 60);
-                var seconds = Math.floor(root.elapsedSeconds % 60);
-                var centiseconds = Math.floor((root.elapsedSeconds % 1) * 100);
-                return minutes.toString().padStart(2, '0') + ":" + 
-                    seconds.toString().padStart(2, '0') + ":" + 
-                    centiseconds.toString().padStart(2, '0');
-            }
-
-            verticalAlignment: Label.AlignVCenter
-            horizontalAlignment: Label.AlignHCenter
-        }
-
-        Button {
-            text: stopwatchTimer.running ? i18n.tr('Stop') : i18n.tr('Start')
-            color: stopwatchTimer.running ? UbuntuColors.red : UbuntuColors.green
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
-                margins: units.gu(2)
-            }
-            onClicked: {
-                stopwatchTimer.running = !stopwatchTimer.running
-                if (!stopwatchTimer.running) {
-                    stopwatchTimer.stop()
-                } else {
-                    stopwatchTimer.start()
+                onClicked: {
+                    mainWindow.elapsedSeconds = 0
                 }
             }
         }
+        
+        Item {
 
-        Button {
-            id: resetButton
-
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: units.gu(22)
-                margins: units.gu(2)
+            Rectangle
+            {
+                anchors.fill: parent
+                color: "black"
             }
 
-            text: i18n.tr('Reset')
-            color: UbuntuColors.green
-            visible: !stopwatchTimer.running && root.elapsedSeconds > 0
-
-            onClicked: {
-                root.elapsedSeconds = 0
+            Label {
+                text: "Notes"
+                anchors.centerIn: parent
+                color: "white"
             }
         }
+        
+        Item {
+            Rectangle
+            {
+                anchors.fill: parent
+                color: "black"
+            }
+
+            Label {
+                text: "Music"
+                anchors.centerIn: parent
+                color: "white"
+            }
+        }  
     }
+
+    PageIndicator {
+        id: indicator
+
+        count: view.count
+        currentIndex: view.currentIndex
+
+        anchors.bottom: view.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+    }   
 }
