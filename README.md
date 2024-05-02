@@ -1,4 +1,4 @@
-# Hello World
+# GYMRAT Description
 
 Application in Qt for Ubuntu touch.
 
