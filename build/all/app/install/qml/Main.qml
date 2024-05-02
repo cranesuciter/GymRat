@@ -64,21 +64,15 @@ ApplicationWindow {
             Rectangle {
 
                 id: circleBackground
-                width: units.gu(25) // adjust to your needs
-                height: width // to make it a circle
-                color: "grey" // adjust to your needs
+                width: units.gu(25)
+                height: width
+                color: "grey"
                 radius: width / 2
                 anchors.centerIn: parent
 
             }
 
             Label {
-                //anchors {
-                //    top: header.bottom
-                //    left: parent.left
-                //    right: parent.right
-                //    bottom: parent.bottom
-                //}
                 anchors.centerIn: circleBackground
                 font.pixelSize: units.gu(5)
                 text: {
