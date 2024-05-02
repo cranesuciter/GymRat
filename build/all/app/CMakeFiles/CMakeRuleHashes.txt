@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+6310625fc5cee12891ea005502d6b8fa CMakeFiles/qttest.desktop
+9bcd229f04e34814cd19ad566aa72a97 po/CMakeFiles/qttest.cranesuciter.pot

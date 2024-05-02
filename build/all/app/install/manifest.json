@@ -1,0 +1,15 @@
+{
+    "name": "qttest.cranesuciter",
+    "description": "Example App with Clickable",
+    "architecture": "all",
+    "title": "Hello World",
+    "hooks": {
+        "qttest": {
+            "apparmor": "qttest.apparmor",
+            "desktop":  "qttest.desktop"
+        }
+    },
+    "version": "1.0.0",
+    "maintainer": "Louis Voisembert <louis.voisembert@free.fr>",
+    "framework" : "ubuntu-sdk-20.04.1"
+}

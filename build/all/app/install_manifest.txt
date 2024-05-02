@@ -1,0 +1,6 @@
+/./manifest.json
+//qttest.apparmor
+//assets/logo.svg
+//qml/Main.qml
+//qml/Notes.qml
+//qttest.desktop
