@@ -1,6 +1,9 @@
 # Hello World
 
-Example App with Clickable
+Application in Qt for Ubuntu touch.
+
+GymRat is an application all in one.
+Take some notes, rest timer and play music !
 
 ## License
 
