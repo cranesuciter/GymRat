@@ -37,23 +37,26 @@ MainView {
         anchors.fill: parent
         header: PageHeader {
             id: header
-            title: i18n.tr('GymRat')
 
-            Row {
+            RowLayout {
+                anchors.centerIn: parent
                 Button {
-                    text: "Main Page"
+                    text: "Stopwatch"
                     onClicked: mainPage.StackView.push(Qt.resolvedUrl("Main.qml"))
                 }
                 Button {
                     text: "Notes"
                     onClicked: mainPage.StackView.push(Qt.resolvedUrl("Notes.qml"))
                 }
+                Button {
+                    text: "Music"
+                    onClicked: mainPage.StackView.push(Qt.resolvedUrl("Notes.qml"))
+                }
             }
 
             StyleHints {
-                foregroundColor: UbuntuColors.orange
-                backgroundColor: UbuntuColors.porcelain
-                dividerColor: UbuntuColors.slate
+                backgroundColor: "transparent"
+                dividerColor: "transparent"
             }
         }
 

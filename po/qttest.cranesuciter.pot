@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: qttest.cranesuciter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-02 19:54+0000\n"
+"POT-Creation-Date: 2024-05-02 20:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:40
-msgid "GymRat"
-msgstr ""
-
-#: ../qml/Main.qml:109
+#: ../qml/Main.qml:112
 msgid "Start"
 msgstr ""
 
-#: ../qml/Main.qml:109
+#: ../qml/Main.qml:112
 msgid "Stop"
 msgstr ""
 
-#: ../qml/Main.qml:135
+#: ../qml/Main.qml:138
 msgid "Reset"
 msgstr ""
 
