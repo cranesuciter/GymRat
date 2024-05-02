@@ -20,6 +20,8 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import Qt.labs.settings 1.0
 import Ubuntu.Components 1.3
+import QtMultimedia 5.0
+
 
 ApplicationWindow {
     visible: true
@@ -151,6 +153,12 @@ ApplicationWindow {
                 anchors.centerIn: parent
                 color: "white"
             }
+
+            // MediaPlayer {
+            //     audioOutput: AudioOutput {}
+            //     source: "file:///path/to/my/music.mp3"
+            //     Component.onCompleted: { play() }
+            // }
         }  
     }
 
